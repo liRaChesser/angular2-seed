@@ -1,0 +1,39 @@
+<div class="container">
+        <form [formGroup]='userForm' (ngSubmit)="submitFormData(userForm)" novalidate>
+            <div class="form-group">
+                <label for="fname">First Name:</label>
+                    <input type="text" class="form-control" name="fname" formControlName="fname" >
+                    <div *ngIf="userForm.controls['fname'].errors">
+                       <div *ngIf="userForm.controls.fname.errors.required" class="alert alert-danger">Enter First Name</div>
+                       <div *ngIf="userForm.controls.fname.errors.minlength" class="alert alert-danger">Enter First Name more than 2 characters</div>
+                    </div>
+                    
+            </div>
+    
+            <div class="form-group">
+                <label for="lname">Last Name:</label>
+                    <input type="text" class="form-control" name="lname" formControlName="lname"  >
+            </div>
+    
+            <div class="form-group">
+                <label for="age">Age:</label>
+                    <input type="text" class="form-control" name="age" formControlName="age" >
+            </div>
+    
+            <div formGroupName="address">
+                <div class="form-group">
+                    <label for="address1">Address 1:</label>
+                    <input type="text" class="form-control" name="address1" formControlName="address1">
+                </div>
+                <div class="form-group">
+                    <label for="city">City:</label>
+                    <input type="text" class="form-control" name="city" formControlName="city">
+                </div>
+                <div class="form-group">
+                    <label for="pincode">Postal Code:</label>
+                    <input type="text" class="form-control" name="pinCode" formControlName="pinCode">
+                </div>
+            </div>
+            <input type="submit" class="btn btn-success pull-right" [disabled]=!userForm.valid value="Submit">
+        </form>
+    </div>
