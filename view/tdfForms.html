@@ -1,0 +1,42 @@
+<div class="container">
+        <form #tdform="ngForm" (ngSubmit)="submitFormData(tdform.value)" novalidate>
+            <div class="form-group">
+                <label for="fname">First Name:</label>
+                    <input type="text" class="form-control" name="fname" [(ngModel)]="fname" required maxlength="20" minlength="4" #fName="ngModel">
+                    <div *ngIf="!fName.valid && fName.touched && fName.errors">
+                        <div class="alert alert-danger" [hidden]="!fName.errors.required">This field is required</div>
+                        <div class="alert alert-danger" [hidden]="!fName.errors.minlength">Please enter expected length</div>
+                    </div>
+            </div>
+    
+            <div class="form-group">
+                <label for="lname">Last Name:</label>
+                    <input type="text" class="form-control" name="lname" [(ngModel)]="lname" required maxlength="20" minlength="4" #lName="ngModel" [ngClass]="checkFormValid(lName)">
+            </div>
+    
+            <div class="form-group">
+                <label for="age">Age:</label>
+                    <input type="text" class="form-control" name="age" [(ngModel)]="age" required pattern="[0-9][0-9]$" maxlength="2" minlength="2" #ageObj="ngModel" [ngClass]="checkFormValid(ageObj)">
+            </div>
+    
+            <div class="form-group">
+                <label for="designation">Designation:</label>
+                    <input type="text" class="form-control" name="designation" [(ngModel)]="designation" maxlength="20" minlength="4" #designationObj="ngModel" [ngClass]="checkFormValid(designationObj)">
+            </div>
+            <div ngModelGroup="address">
+                <div class="form-group">
+                    <label for="address1">Address 1:</label>
+                    <input type="text" class="form-control" name="address.address1" [(ngModel)]="address.address1">
+                </div>
+                <div class="form-group">
+                    <label for="city">City:</label>
+                    <input type="text" class="form-control" name="address.city" [(ngModel)]="address.city">
+                </div>
+                <div class="form-group">
+                    <label for="pincode">Postal Code:</label>
+                    <input type="text" class="form-control" name="address.pincode" [(ngModel)]="address.pincode">
+                </div>
+            </div>
+            <input type="submit" class="btn btn-success pull-right" [disabled]=!tdform.valid value="Submit">
+        </form>
+    </div>
